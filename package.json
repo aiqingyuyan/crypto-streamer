@@ -1,0 +1,14 @@
+{
+  "name": "crypto-streamer",
+  "version": "0.0.1",
+  "description": "",
+  "main": "crypto-streamer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yan",
+  "license": "ISC",
+  "dependencies": {
+    "sprintf-js": "^1.1.1"
+  }
+}
