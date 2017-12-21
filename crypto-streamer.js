@@ -14,12 +14,12 @@ const displayCurrenciesStats = (queriedCurrencyList) => {
         if (currencies.has(c["symbol"])) {
             const down1h = c["percent_change_1h"][0] === '-';
             const down24h = c["percent_change_24h"][0] === "-";
-            currenciesStats += sprintf(`%s\t${down1h ? '\x1b[31m' : '\x1b[32m'}%10.3f\t\t${down1h ? '\x1b[31m' : '\x1b[32m'}%8.2f\t\t${down24h ? '\x1b[31m' : '\x1b[32m'}%8.2f\n`, c["symbol"], c["price_usd"], c["percent_change_1h"], c["percent_change_24h"]);
+            currenciesStats += sprintf(`${down1h ? '\x1b[31m' : '\x1b[32m'}%s\t${down1h ? '\x1b[31m' : '\x1b[32m'}%10.3f\t\t${down1h ? '\x1b[31m' : '\x1b[32m'}%8.2f\t\t${down24h ? '\x1b[31m' : '\x1b[32m'}%8.2f\n`, c["symbol"], c["price_usd"], c["percent_change_1h"], c["percent_change_24h"]);
         }
     }
 
     process.stdout.write(currenciesStats);
-    process.stdout.clearLine();
+    // process.stdout.clearLine();
     process.stdout.moveCursor(0, -currencies.size);
 }
 
