@@ -3,7 +3,6 @@ const https = require("https");
 const util = require("util");
 const sprintf = require("sprintf-js").sprintf;
 const currencies = new Set(["BTC", "EOS", "MIOTA", "SC", "ZRX"]);
-const test = 0.002341;
 
 process.stdout.write("\tPrice (USD)\t\t% Change (1h)\t\t% Change (24h)\n");
 
