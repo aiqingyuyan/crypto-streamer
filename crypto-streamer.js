@@ -2,7 +2,9 @@
 const https = require("https");
 const util = require("util");
 const sprintf = require("sprintf-js").sprintf;
-const currencies = new Set(["BTC", "EOS", "MIOTA", "SC", "ZRX"]);
+
+const currencies = new Set(["BTC", "BCH", "EOS", "MIOTA", "SC", "ZRX"]);
+const frequency = 3; // secs
 
 process.stdout.write("\tPrice (USD)\t\t% Change (1h)\t\t% Change (24h)\n");
 
@@ -51,7 +53,7 @@ const getStats = () => {
 
 const timeout = setInterval(() => {
     getStats();
-}, 5000);
+}, frequency * 1000);
 
 process.on("SIGINT", () => {
     process.stdout.moveCursor(0, currencies.size);
