@@ -3,8 +3,10 @@ const https = require("https");
 const util = require("util");
 const sprintf = require("sprintf-js").sprintf;
 
-const currencies = new Set(["BTC", "BCH", "EOS", "MIOTA", "SC", "ZRX"]);
+const currencies = new Set(["BTC", "EOS", "XLM", "XVG", "ZRX"]);
 const frequency = 3; // secs
+
+let timeout;
 
 process.stdout.write("\tPrice (USD)\t\t% Change (1h)\t\t% Change (24h)\n");
 
@@ -44,6 +46,10 @@ const getStats = () => {
             try {
                 const currencyList = JSON.parse(rawData);
                 displayCurrenciesStats(currencyList);
+
+                timeout = setTimeout(() => {
+                    getStats();
+                }, frequency * 1000);
             } catch (err) {
                 console.error(err.message);
             }
@@ -51,12 +57,10 @@ const getStats = () => {
     });
 }
 
-const timeout = setInterval(() => {
-    getStats();
-}, frequency * 1000);
+getStats();
 
 process.on("SIGINT", () => {
     process.stdout.moveCursor(0, currencies.size);
-    // process.stdout.write("interruptted...\n");
-    clearInterval(timeout);
+    process.stdout.write("process interruptted...\n");
+    clearTimeout(timeout);
 });
